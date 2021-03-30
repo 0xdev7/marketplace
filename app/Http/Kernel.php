@@ -52,7 +52,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'captcha' => \App\Http\Middleware\Captcha::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'tfa' => \App\Http\Middleware\TwoFactorAuth::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

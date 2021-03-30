@@ -7,8 +7,8 @@
                 <legend>Login</legend>
                 @csrf
                 <div class="form-group">
-                    <label for="inputEmail">Email address</label>
-                    <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="inputUsername">Username</label>
+                    <input type="username" class="form-control" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Enter username">
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Password</label>

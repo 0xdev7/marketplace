@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Libraries\PGP2FA;
 
 use App\User;
 
@@ -20,9 +21,15 @@ class AuthController extends Controller
 
     public function check_login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
+            if (Auth::user()->tfa_status == 1) {
+                $this->set_tfaStatus(0);
+                return redirect()->route('twofactor');
+            }
+
+            $this->set_tfaStatus(1);
             return redirect()->route('home');
         }
 
@@ -71,10 +78,40 @@ class AuthController extends Controller
 
     public function twofactor()
     {
-        return view('auth.twofactor');
+        if (Auth::user() == null)
+            return redirect()->route('login');
+
+        $pgp = new PGP2FA();
+        $pgp->generateSecret();
+        $pgpmessage = $pgp->encryptSecret(Auth::user()->pgp_pubkey);
+
+        return view('auth.twofactor', array('keyword' => $pgpmessage));
     }
 
-    public function check_twofactor()
+    public function check_twofactor(Request $request)
     {
+        $this->validate($request, [
+            'keyword' => 'required',
+        ]);
+
+        $pgp = new PGP2FA();
+
+        if ($pgp->compare($request->keyword)) {
+            $this->set_tfaStatus(1);
+            return redirect()->route('home');
+        }
+
+        return back()->withErrors([
+            'message' => 'The keyword is incorrect, please try again.'
+        ]);
+    }
+
+    public function set_tfaStatus($status)
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        $user->tfa_checked = $status;
+        $user->save();
+        return true;
     }
 }

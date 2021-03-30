@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/captcha', 'CaptchaController@index')->name('captcha');
+Route::post('/captcha', 'CaptchaController@check_captcha')->name('check_captcha');
 
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/login', 'AuthController@check_login')->name('check_login');
@@ -30,5 +31,7 @@ Route::post('/resetpwd', 'AuthController@do_resetpwd')->name('do_resetpwd');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
 /////////////////////// frontend ///////////////////////////
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/setting', 'HomeController@setting')->name('setting');
 Route::post('/setting', 'HomeController@store')->name('update_setting');
