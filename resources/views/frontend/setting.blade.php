@@ -18,11 +18,11 @@
             @endif
         </div>
         <div class="py-3">
-            <div class="d-flex align-items-center flex-wrap">
+            <div class="d-flex flex-wrap">
                 <div class="mr-3 text-center">
                     <img src=" {{ asset('assets/uploads/avatar/2.jpg') }}" class="rounded-circle border border-success" width="200" />
                 </div>
-                <div class="my-3">
+                <div class="my-3 mr-auto">
                     <legend>My Info</legend>
                     <div>
                         <label>Full Name : James Franco </label>
@@ -36,6 +36,10 @@
                     <div>
                         <label>Phonenumber : (+1) 83-293-9482 </label>
                     </div>
+                </div>
+                <div class="d-flex flex-column align-items-end">
+                    <a href="{{ route('home') }}" class="btn btn-primary mb-3">Back</a>
+                    <button type="submit" class="btn btn-primary mb-3">Become a Vendor</button>
                 </div>
             </div>
         </div>

@@ -33,5 +33,11 @@ Route::get('/logout', 'AuthController@logout')->name('logout');
 /////////////////////// frontend ///////////////////////////
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/userpanel', 'PanelController@index')->name('userpanel');
+Route::get('/buyerpanel', 'PanelController@buyerpanel')->name('buyerpanel');
+Route::get('/vendorpanel', 'PanelController@vendorpanel')->name('vendorpanel');
+Route::get('/adminpanel', 'PanelController@adminpanel')->name('adminpanel');
+
 Route::get('/setting', 'HomeController@setting')->name('setting');
 Route::post('/setting', 'HomeController@store')->name('update_setting');
+

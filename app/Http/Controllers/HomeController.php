@@ -19,6 +19,11 @@ class HomeController extends Controller
         return view('frontend.index');
     }
 
+    public function buyerpanel()
+    {
+        return view('frontend.buyerpanel');
+    }
+
     public function setting()
     {
         return view('frontend.setting');

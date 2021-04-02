@@ -14,7 +14,7 @@
             <div class="order-3 order-sm-3 col-md-4 align-self-end py-1">
                 <a href="{{ route('setting') }}" class="btn btn-primary btn-lg btn-block">SETTINGS</a>
                 <button type="button" class="btn btn-primary btn-lg btn-block">MESSAGES</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block">BUYER PANEL</button>
+                <a href="{{ route('userpanel') }}" class="btn btn-primary btn-lg btn-block">User Panel</a>
             </div>
         </div>
         <div class="py-5">
